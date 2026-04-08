@@ -12,11 +12,15 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  // Configuration options can be added here as needed
-  // Examples:
-  // images: { domains: ['example.com'] },
-  // env: { CUSTOM_KEY: 'value' },
-  // experimental: { appDir: true },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

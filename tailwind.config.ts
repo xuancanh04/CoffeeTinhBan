@@ -31,24 +31,38 @@ const config: Config = {
       lg: "960px",   // Large devices (laptops)
       xl: "1430px",  // Extra large devices (desktops) - Custom breakpoint
     },
-    // Font families mapped to CSS variables from layout.tsx
     fontFamily: {
-      primary: "var(--font-cormorant_upright)", // Heading font
-      secondary: "var(--font-open_sans)",       // Body font
+      primary: ["var(--font-fraunces)", "Georgia", "serif"],
+      secondary: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
     },
     extend: {
-      // Custom color palette for the coffee shop theme
       colors: {
         primary: {
-          DEFAULT: "#100e0e", // Dark brown/black - Main text color
+          DEFAULT: "#100e0e",
         },
         secondary: {
-          DEFAULT: "#787f8a", // Gray - Secondary text color
+          DEFAULT: "#5c5348",
+        },
+        muted: {
+          DEFAULT: "#8a8278",
         },
         accent: {
-          DEFAULT: "#c7a17a", // Gold/brown - Accent color for highlights
-          hover: "#a08161",   // Darker gold - Hover state
+          DEFAULT: "#b8956b",
+          hover: "#9a7a52",
         },
+        surface: {
+          DEFAULT: "#faf7f2",
+          card: "#ffffff",
+          dark: "#1a1612",
+        },
+        cream: {
+          DEFAULT: "#f3ebe0",
+          deep: "#e8dcc8",
+        },
+      },
+      boxShadow: {
+        soft: "0 8px 30px rgba(26, 22, 18, 0.08)",
+        card: "0 4px 24px rgba(26, 22, 18, 0.06)",
       },
       // Custom background images - Used with bg-{name} utility classes
       backgroundImage: {
