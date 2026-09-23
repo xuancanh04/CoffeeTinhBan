@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { FaPhone } from "react-icons/fa";
+import { Phone } from "lucide-react";
 import { SiZalo } from "react-icons/si";
 import { site } from "@/lib/site-config";
 
@@ -19,22 +19,22 @@ export function StickyContact() {
     >
       <motion.a
         href={`tel:${site.phone}`}
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:h-[52px] md:w-[52px]"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-soft ring-4 ring-surface/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:h-[52px] md:w-[52px]"
         aria-label={`Gọi ${site.phoneDisplay}`}
-        whileHover={reduce ? undefined : { scale: 1.03 }}
-        whileTap={reduce ? undefined : { scale: 0.97 }}
+        whileHover={reduce ? undefined : { scale: 1.05 }}
+        whileTap={reduce ? undefined : { scale: 0.96 }}
         transition={{ type: "spring", stiffness: 320, damping: 30 }}
-  >
-        <FaPhone className="h-5 w-5" aria-hidden />
+      >
+        <Phone className="h-5 w-5" aria-hidden />
       </motion.a>
       <motion.a
         href={site.zaloUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#0068FF] text-white shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0068FF] md:h-[52px] md:w-[52px]"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-[#0068FF] text-white shadow-soft ring-4 ring-surface/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0068FF] md:h-[52px] md:w-[52px]"
         aria-label="Nhắn Zalo quán Coffee Tình Bạn"
-        whileHover={reduce ? undefined : { scale: 1.03 }}
-        whileTap={reduce ? undefined : { scale: 0.97 }}
+        whileHover={reduce ? undefined : { scale: 1.05 }}
+        whileTap={reduce ? undefined : { scale: 0.96 }}
         transition={{ type: "spring", stiffness: 320, damping: 30 }}
       >
         <SiZalo className="h-6 w-6" aria-hidden />

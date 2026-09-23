@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import { site } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const nav = [
   { href: "/", label: "Trang chủ" },
@@ -31,19 +34,19 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-[80] border-b border-cream-deep/80 bg-surface/90 backdrop-blur-md">
-      <div className="container flex min-h-[64px] items-center justify-between gap-4 py-3 md:min-h-[72px]">
+    <header className="sticky top-0 z-[80] border-b border-cream-deep/50 bg-surface/80 backdrop-blur-xl">
+      <div className="container flex min-h-[68px] items-center justify-between gap-4 py-3 md:min-h-[76px]">
         <Link
           href="/"
-          className="flex items-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-lg"
+          className="rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-          <span className="font-primary text-xl font-semibold tracking-tight text-primary md:text-2xl">
+          <span className="font-primary text-xl font-semibold tracking-tight text-primary md:text-[1.65rem]">
             {site.name}
           </span>
         </Link>
 
         <nav
-          className="hidden items-center gap-1 lg:flex"
+          className="hidden items-center gap-0.5 lg:flex"
           aria-label="Điều hướng chính"
         >
           {nav.map((item) => {
@@ -55,11 +58,12 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
+                className={cn(
+                  "rounded-full px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
                   active
-                    ? "bg-cream text-primary"
+                    ? "bg-primary/90 text-white"
                     : "text-secondary hover:bg-cream/80 hover:text-primary"
-                }`}
+                )}
               >
                 {item.label}
               </Link>
@@ -67,42 +71,35 @@ export function SiteHeader() {
           })}
         </nav>
 
+        <div className="hidden items-center gap-2 lg:flex">
+          <Button asChild variant="outline" size="sm">
+            <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
+          </Button>
+        </div>
+
         <button
           type="button"
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-cream-deep/80 bg-white text-primary lg:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-cream-deep/70 bg-surface-card text-primary shadow-card lg:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Đóng menu" : "Mở menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="sr-only">Menu</span>
-          <span className="relative block h-3.5 w-5">
-            <span
-              className={`absolute left-0 top-0 h-0.5 w-5 rounded-full bg-current transition-transform ${
-                open ? "translate-y-1.5 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-1.5 h-0.5 w-5 rounded-full bg-current transition-opacity ${
-                open ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`absolute left-0 top-3 h-0.5 w-5 rounded-full bg-current transition-transform ${
-                open ? "-translate-y-1.5 -rotate-45" : ""
-              }`}
-            />
-          </span>
+          {open ? (
+            <X className="h-5 w-5" aria-hidden />
+          ) : (
+            <Menu className="h-5 w-5" aria-hidden />
+          )}
         </button>
       </div>
 
       {open ? (
         <div
           id="mobile-nav"
-          className="border-t border-cream-deep/80 bg-surface lg:hidden"
+          className="border-t border-cream-deep/50 bg-surface/95 backdrop-blur-xl lg:hidden"
         >
           <nav
-            className="container flex flex-col gap-1 py-4"
+            className="container flex flex-col gap-1 py-5"
             aria-label="Điều hướng di động"
           >
             {nav.map((item) => {
@@ -114,16 +111,23 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-xl px-4 py-3 text-base font-medium ${
+                  className={cn(
+                    "rounded-2xl px-4 py-3.5 text-base font-medium transition-colors",
                     active
-                      ? "bg-cream text-primary"
-                      : "text-secondary hover:bg-cream/70"
-                  }`}
+                      ? "bg-primary text-white"
+                      : "text-secondary hover:bg-cream/80 hover:text-primary"
+                  )}
                 >
                   {item.label}
                 </Link>
               );
             })}
+            <a
+              href={`tel:${site.phone}`}
+              className="mt-2 rounded-2xl bg-accent px-4 py-3.5 text-center text-base font-semibold text-white"
+            >
+              Gọi {site.phoneDisplay}
+            </a>
           </nav>
         </div>
       ) : null}

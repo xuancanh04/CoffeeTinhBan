@@ -11,27 +11,27 @@ const links = [
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-cream-deep/80 bg-surface-dark text-cream">
-      <div className="container py-12 md:py-16">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+    <footer className="mt-auto bg-surface-dark text-cream">
+      <div className="container py-14 md:py-16">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-14">
           <div>
-            <p className="font-primary text-2xl font-semibold text-white">
+            <p className="font-primary text-2xl font-semibold text-white md:text-3xl">
               {site.name}
             </p>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-cream/75">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-cream/70">
               {site.shortDescription}
             </p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-cream/50">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/45">
               Điều hướng
             </p>
-            <ul className="mt-4 flex flex-col gap-2">
+            <ul className="mt-5 flex flex-col gap-2.5">
               {links.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-cream/85 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent rounded-sm"
+                    className="rounded-sm text-cream/85 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   >
                     {l.label}
                   </Link>
@@ -40,10 +40,10 @@ export function SiteFooter() {
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-cream/50">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/45">
               Liên hệ nhanh
             </p>
-            <p className="mt-4 text-sm text-cream/85">
+            <p className="mt-5 text-sm text-cream/85">
               Điện thoại:{" "}
               <a
                 href={`tel:${site.phone}`}
@@ -52,12 +52,12 @@ export function SiteFooter() {
                 {site.phoneDisplay}
               </a>
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-cream/75">
+            <p className="mt-3 text-sm leading-relaxed text-cream/70">
               {site.addressLine}
             </p>
           </div>
         </div>
-        <div className="mt-12 border-t border-white/10 pt-8 text-center text-xs text-cream/50">
+        <div className="mt-12 border-t border-white/10 pt-8 text-center text-xs text-cream/45">
           © {new Date().getFullYear()} {site.name}. Giữ quyền sử dụng nội dung trên
           website này.
         </div>

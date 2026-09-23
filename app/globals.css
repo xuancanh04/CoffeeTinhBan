@@ -11,10 +11,18 @@
     html {
       scroll-behavior: auto;
     }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 
   body {
-    @apply font-secondary text-secondary leading-relaxed antialiased bg-surface;
+    @apply font-secondary text-secondary leading-relaxed antialiased bg-surface bg-atmosphere;
   }
 
   h1,
@@ -26,24 +34,13 @@
     @apply text-primary font-primary;
   }
 
-  .h1 {
-    @apply text-[70px] xl:text-[150px] leading-[1.1] font-semibold;
-  }
-
-  .h2 {
-    @apply text-[56px] xl:text-[80px] leading-[1.2] font-bold;
-  }
-
-  .lead {
-    @apply text-lg;
-  }
-
-  .btn {
-    @apply min-w-[156px] h-[54px] px-6 bg-accent hover:bg-accent-hover text-primary text-[13px] uppercase font-semibold tracking-[.15em] transition-all;
+  ::selection {
+    @apply bg-accent/20 text-primary;
   }
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  @apply text-primary !text-[2rem];
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

@@ -9,6 +9,7 @@ import { SectionTitle } from "@/components/site/SectionTitle";
 import { site } from "@/lib/site-config";
 import { menuItems } from "@/data/menu";
 import { ProductCard } from "@/components/site/ProductCard";
+import { Button } from "@/components/ui/button";
 
 const heroImage =
   "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85";
@@ -41,53 +42,54 @@ export default function HomePage() {
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover scale-[1.02]"
           />
           <div
-            className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/65 to-primary/90"
+            className="absolute inset-0 bg-gradient-to-b from-primary/55 via-primary/45 to-primary/85"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_transparent_20%,_rgba(35,25,20,0.35)_100%)]"
             aria-hidden
           />
         </div>
-        <div className="container relative z-10 flex min-h-[min(88vh,820px)] flex-col justify-end pb-16 pt-28 md:pb-24 md:pt-32">
+        <div className="container relative z-10 flex min-h-[min(90vh,860px)] flex-col justify-end pb-16 pt-28 md:pb-24 md:pt-32">
           <HeroStagger>
             <HeroStaggerItem>
-              <p className="text-sm font-medium uppercase tracking-[0.25em] text-cream/90">
+              <p className="text-sm font-medium uppercase tracking-[0.28em] text-cream/80">
                 {site.heroEyebrow}
               </p>
             </HeroStaggerItem>
-            <HeroStaggerItem className="mt-3">
-              <div className="w-full min-w-0 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] md:overflow-visible [&::-webkit-scrollbar]:hidden">
-                <h1 className="whitespace-nowrap font-primary text-2xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
-                  {site.tagline}
-                </h1>
-              </div>
+            <HeroStaggerItem className="mt-4">
+              <h1 className="max-w-4xl font-primary text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem]">
+                {site.name}
+              </h1>
+            </HeroStaggerItem>
+            <HeroStaggerItem className="mt-4">
+              <p className="max-w-xl text-lg font-medium leading-snug text-cream/95 md:text-xl">
+                Cà phê rang xay nguyên chất
+              </p>
             </HeroStaggerItem>
             <HeroStaggerItem className="mt-5">
-              <p className="max-w-2xl text-balance text-lg leading-relaxed text-cream/90 md:text-xl">
+              <p className="max-w-xl text-balance text-base leading-relaxed text-cream/80 md:text-lg">
                 {site.heroIntro}
               </p>
             </HeroStaggerItem>
             <HeroStaggerItem className="mt-10">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Link
-                  href="/menu"
-                  className="inline-flex min-h-[52px] min-w-[160px] items-center justify-center rounded-xl bg-accent px-8 py-3.5 text-center text-sm font-semibold text-white shadow-soft transition-colors duration-200 hover:bg-accent-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-safe:transition-transform motion-safe:hover:scale-[1.01] motion-safe:active:scale-[0.99]"
-                >
-                  Xem menu
-                </Link>
-                <Link
-                  href="/lien-he"
-                  className="inline-flex min-h-[52px] min-w-[160px] items-center justify-center rounded-xl border-2 border-white/40 bg-white/10 px-8 py-3.5 text-center text-sm font-semibold text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white motion-safe:transition-transform motion-safe:hover:scale-[1.01] motion-safe:active:scale-[0.99]"
-                >
-                  Liên hệ ngay
-                </Link>
+                <Button asChild size="lg" variant="default">
+                  <Link href="/menu">Xem menu</Link>
+                </Button>
+                <Button asChild size="lg" variant="soft">
+                  <Link href="/lien-he">Liên hệ ngay</Link>
+                </Button>
               </div>
             </HeroStaggerItem>
           </HeroStagger>
         </div>
       </section>
 
-      <section className="border-b border-cream-deep/60 bg-surface py-16 md:py-20">
+      <section className="relative py-16 md:py-24">
         <div className="container">
           <FadeIn>
             <SectionTitle
@@ -96,30 +98,36 @@ export default function HomePage() {
               subtitle="Nhanh chóng, thân thiện, và luôn giữ trọn sự nguyên bản trong từng hạt."
             />
           </FadeIn>
-          <ul className="grid gap-6 md:grid-cols-3">
+          <ul className="grid gap-8 md:grid-cols-3 md:gap-6">
             {services.map((s, i) => (
               <FadeIn
                 key={s.title}
                 as="li"
                 delay={i * 0.07}
-                className="rounded-2xl border border-cream-deep/70 bg-surface-card p-6 shadow-card motion-safe:transition-shadow motion-safe:duration-300 motion-safe:hover:shadow-soft"
+                className="relative pt-2"
               >
-                <h3 className="font-primary text-xl font-semibold text-primary">
+                <span
+                  className="mb-4 block font-primary text-4xl font-semibold text-accent/25"
+                  aria-hidden
+                >
+                  0{i + 1}
+                </span>
+                <h3 className="font-primary text-xl font-semibold text-primary md:text-[1.35rem]">
                   {s.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-secondary">
+                <p className="mt-3 text-sm leading-relaxed text-secondary md:text-[0.95rem]">
                   {s.text}
                 </p>
               </FadeIn>
             ))}
           </ul>
-          <FadeIn delay={0.12} className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link
-              href="/rang-xay"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-xl border-2 border-primary/15 bg-surface-card px-6 py-3 text-sm font-semibold text-primary shadow-card transition-colors duration-200 hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-safe:transition-transform motion-safe:hover:scale-[1.01]"
-            >
-              Tìm hiểu rang xay
-            </Link>
+          <FadeIn
+            delay={0.12}
+            className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <Button asChild variant="outline">
+              <Link href="/rang-xay">Tìm hiểu rang xay</Link>
+            </Button>
             <a
               href={`tel:${site.phone}`}
               className="text-sm font-semibold text-accent underline-offset-4 transition-colors duration-200 hover:underline"
@@ -130,7 +138,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="border-y border-cream-deep/40 bg-surface-card/40 py-16 md:py-24">
         <div className="container">
           <FadeIn>
             <SectionTitle
@@ -147,12 +155,9 @@ export default function HomePage() {
             ))}
           </div>
           <FadeIn delay={0.15} className="mt-12 text-center">
-            <Link
-              href="/menu"
-              className="inline-flex min-h-[48px] min-w-[200px] items-center justify-center rounded-xl bg-primary px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary motion-safe:transition-transform motion-safe:hover:scale-[1.01] motion-safe:active:scale-[0.99]"
-            >
-              Xem toàn bộ menu
-            </Link>
+            <Button asChild size="lg" variant="primary">
+              <Link href="/menu">Xem toàn bộ menu</Link>
+            </Button>
           </FadeIn>
         </div>
       </section>

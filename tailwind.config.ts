@@ -1,35 +1,30 @@
-/**
- * Tailwind CSS Configuration
- * 
- * Customizes Tailwind CSS for the project:
- * - Defines content paths for class purging
- * - Custom theme colors, fonts, and breakpoints
- * - Background image utilities
- * - Container settings
- */
-
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  // Content paths: Tailwind scans these files for class names
-  // Unused classes are removed during build (purge/optimization)
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",      // Pages directory (if using Pages Router)
-    "./components/**/*.{js,ts,jsx,tsx,mdx}", // All component files
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",        // App Router files
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    // Container settings: Centers content and adds padding
     container: {
-      center: true,      // Center the container horizontally
-      padding: "15px",   // Default padding on all sides
+      center: true,
+      padding: {
+        DEFAULT: "1.25rem",
+        md: "2rem",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1200px",
+      },
     },
-    // Custom breakpoints for responsive design
     screens: {
-      sm: "640px",   // Small devices (tablets)
-      md: "768px",   // Medium devices (small laptops)
-      lg: "960px",   // Large devices (laptops)
-      xl: "1430px",  // Extra large devices (desktops) - Custom breakpoint
+      sm: "640px",
+      md: "768px",
+      lg: "960px",
+      xl: "1280px",
     },
     fontFamily: {
       primary: ["var(--font-fraunces)", "Georgia", "serif"],
@@ -38,40 +33,54 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#100e0e",
+          DEFAULT: "#2C211C",
         },
         secondary: {
-          DEFAULT: "#5c5348",
+          DEFAULT: "#6B5E54",
         },
         muted: {
-          DEFAULT: "#8a8278",
+          DEFAULT: "#8F857A",
         },
         accent: {
-          DEFAULT: "#b8956b",
-          hover: "#9a7a52",
+          DEFAULT: "#8F6340",
+          hover: "#7A5234",
+        },
+        leaf: {
+          DEFAULT: "#6F7D5C",
         },
         surface: {
-          DEFAULT: "#faf7f2",
-          card: "#ffffff",
-          dark: "#1a1612",
+          DEFAULT: "#F2F0EB",
+          card: "#FFFCF8",
+          dark: "#231914",
         },
         cream: {
-          DEFAULT: "#f3ebe0",
-          deep: "#e8dcc8",
+          DEFAULT: "#EBE6DC",
+          deep: "#DDD5C8",
         },
       },
       boxShadow: {
-        soft: "0 8px 30px rgba(26, 22, 18, 0.08)",
-        card: "0 4px 24px rgba(26, 22, 18, 0.06)",
+        soft: "0 18px 40px -18px rgba(44, 33, 28, 0.28)",
+        card: "0 10px 28px -14px rgba(44, 33, 28, 0.16)",
+        lift: "0 22px 50px -20px rgba(44, 33, 28, 0.22)",
       },
-      // Custom background images - Used with bg-{name} utility classes
       backgroundImage: {
-        hero_overlay: "url('/assets/hero/hero-overlay.png')",   // Hero section overlay
-        opening_hours: "url('/assets/opening-hours/bg.png')",   // Opening hours background
-        footer: "url('/assets/footer/bg.png')",                 // Footer background
+        atmosphere:
+          "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(143, 99, 64, 0.12), transparent 55%), radial-gradient(ellipse 60% 40% at 100% 20%, rgba(111, 125, 92, 0.08), transparent 50%)",
+        hero_overlay: "url('/assets/hero/hero-overlay.png')",
+        opening_hours: "url('/assets/opening-hours/bg.png')",
+        footer: "url('/assets/footer/bg.png')",
+      },
+      keyframes: {
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(12px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "fade-up": "fade-up 0.5s ease forwards",
       },
     },
   },
-  plugins: [], // Tailwind plugins (none currently used)
+  plugins: [],
 };
 export default config;

@@ -6,6 +6,7 @@ import { categoryLabels, menuItems } from "@/data/menu";
 import { FadeIn } from "@/components/site/FadeIn";
 import { ProductCard } from "@/components/site/ProductCard";
 import { SectionTitle } from "@/components/site/SectionTitle";
+import { cn } from "@/lib/utils";
 
 const categories: MenuCategory[] = ["do-uong", "bot", "hat"];
 
@@ -18,7 +19,7 @@ export function MenuClient() {
   }, [active]);
 
   return (
-    <div className="bg-surface pb-20 pt-10 md:pt-14">
+    <div className="pb-20 pt-10 md:pt-14">
       <div className="container">
         <FadeIn>
           <SectionTitle
@@ -29,41 +30,43 @@ export function MenuClient() {
         </FadeIn>
 
         <FadeIn delay={0.05}>
-        <div
-          className="mb-10 flex flex-wrap gap-2 md:gap-3"
-          role="tablist"
-          aria-label="Lọc theo danh mục"
-        >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={active === "tat-ca"}
-            onClick={() => setActive("tat-ca")}
-            className={`min-h-[44px] rounded-full px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-              active === "tat-ca"
-                ? "bg-primary text-white"
-                : "bg-white text-secondary shadow-card border border-cream-deep/60 hover:bg-cream"
-            }`}
+          <div
+            className="mb-10 flex flex-wrap gap-2 md:gap-3"
+            role="tablist"
+            aria-label="Lọc theo danh mục"
           >
-            Tất cả
-          </button>
-          {categories.map((c) => (
             <button
-              key={c}
               type="button"
               role="tab"
-              aria-selected={active === c}
-              onClick={() => setActive(c)}
-              className={`min-h-[44px] rounded-full px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${
-                active === c
-                  ? "bg-primary text-white"
-                  : "bg-white text-secondary shadow-card border border-cream-deep/60 hover:bg-cream"
-              }`}
+              aria-selected={active === "tat-ca"}
+              onClick={() => setActive("tat-ca")}
+              className={cn(
+                "min-h-[44px] rounded-full px-5 py-2.5 text-sm font-semibold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                active === "tat-ca"
+                  ? "bg-primary text-white shadow-soft"
+                  : "bg-surface-card text-secondary shadow-card ring-1 ring-primary/[0.05] hover:bg-cream/80"
+              )}
             >
-              {categoryLabels[c]}
+              Tất cả
             </button>
-          ))}
-        </div>
+            {categories.map((c) => (
+              <button
+                key={c}
+                type="button"
+                role="tab"
+                aria-selected={active === c}
+                onClick={() => setActive(c)}
+                className={cn(
+                  "min-h-[44px] rounded-full px-5 py-2.5 text-sm font-semibold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+                  active === c
+                    ? "bg-primary text-white shadow-soft"
+                    : "bg-surface-card text-secondary shadow-card ring-1 ring-primary/[0.05] hover:bg-cream/80"
+                )}
+              >
+                {categoryLabels[c]}
+              </button>
+            ))}
+          </div>
         </FadeIn>
 
         <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
