@@ -1,105 +1,80 @@
+"use client";
+
 import { FadeIn } from "@/components/site/FadeIn";
 import { SectionTitle } from "@/components/site/SectionTitle";
 import { site } from "@/lib/site-config";
-import { Button } from "@/components/ui/button";
-
-export const metadata = {
-  title: "Liên hệ",
-  description: `Địa chỉ, giờ mở cửa, điện thoại và Zalo quán ${site.name}.`,
-};
+import { useI18n } from "@/lib/i18n";
 
 export default function LienHePage() {
+  const { t } = useI18n();
+
   return (
     <div className="pb-20 pt-10 md:pt-14">
       <div className="container">
         <FadeIn>
           <SectionTitle
-            eyebrow="Liên hệ"
-            title="Ghé quán hoặc nhắn một tin"
-            subtitle="Gọi trước khi đến xa hoặc khi cần rang xay gấp — chúng tôi sẽ báo giờ phù hợp."
+            eyebrow={t.contact.eyebrow}
+            title={t.contact.title}
+            subtitle={t.contact.subtitle}
           />
         </FadeIn>
 
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-12">
           <FadeIn
             delay={0.05}
-            className="rounded-[1.75rem] bg-surface-card p-6 shadow-card ring-1 ring-primary/[0.04] md:p-8"
+            className="py-2"
           >
-            <h2 className="font-primary text-xl font-semibold text-primary">
-              Thông tin
+            <h2 className="font-primary text-3xl font-bold text-primary">
+              {t.contact.infoTitle}
             </h2>
-            <dl className="mt-6 space-y-5 text-sm">
+            <dl className="mt-8 space-y-6 text-base">
               <div>
-                <dt className="font-semibold text-primary">Địa chỉ</dt>
-                <dd className="mt-1.5 leading-relaxed text-secondary">
+                <dt className="text-base font-bold text-primary">{t.contact.address}</dt>
+                <dd className="mt-2 text-base leading-relaxed text-secondary">
                   {site.addressLine}
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold text-primary">Điện thoại</dt>
-                <dd className="mt-1.5">
+                <dt className="text-base font-bold text-primary">{t.contact.phone}</dt>
+                <dd className="mt-2">
                   <a
                     href={`tel:${site.phone}`}
-                    className="text-lg font-semibold text-accent hover:underline"
+                    className="text-xl font-bold text-accent hover:underline hover:text-accent-light"
                   >
                     {site.phoneDisplay}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold text-primary">Zalo</dt>
-                <dd className="mt-1.5">
+                <dt className="text-base font-bold text-primary">{t.contact.zaloLabel}</dt>
+                <dd className="mt-2">
                   <a
                     href={site.zaloUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-[#0068FF] hover:underline"
+                    className="text-base font-semibold text-[#0068FF] hover:underline"
                   >
-                    Chat Zalo với quán
+                    {t.contact.zaloLink}
                   </a>
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold text-primary">Giờ mở cửa</dt>
-                <dd className="mt-1.5 text-secondary">
-                  Trong tuần: {site.hours.weekdays}
-                  <br />
-                  Cuối tuần: {site.hours.weekend}
+                <dt className="text-base font-bold text-primary">{t.contact.hours}</dt>
+                <dd className="mt-2 space-y-1 text-base text-secondary">
+                  <p>{t.contact.weekdays}: {site.hours.weekdays}</p>
+                  <p>{t.contact.weekend}: {site.hours.weekend}</p>
                 </dd>
               </div>
             </dl>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild variant="primary" className="flex-1">
-                <a href={`tel:${site.phone}`}>Gọi ngay</a>
-              </Button>
-              <Button asChild variant="zalo" className="flex-1">
-                <a
-                  href={site.zaloUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Mở Zalo
-                </a>
-              </Button>
-              <Button asChild variant="outline" className="flex-1">
-                <a
-                  href={site.googleMapsSearchUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Chỉ đường
-                </a>
-              </Button>
-            </div>
           </FadeIn>
 
           <FadeIn
             delay={0.1}
-            className="overflow-hidden rounded-[1.75rem] bg-cream shadow-card ring-1 ring-primary/[0.04]"
+            className="overflow-hidden rounded-xl bg-cream shadow-card ring-1 ring-primary/[0.04]"
           >
             <div className="aspect-[4/3] w-full lg:aspect-auto lg:min-h-[420px]">
               <iframe
-                title="Bản đồ quán Coffee Tình Bạn"
+                title={t.contact.mapTitle}
                 src={site.mapEmbedUrl}
                 className="h-full min-h-[280px] w-full border-0 lg:min-h-[420px]"
                 loading="lazy"
@@ -108,8 +83,7 @@ export default function LienHePage() {
               />
             </div>
             <p className="px-4 py-3.5 text-center text-xs leading-relaxed text-muted">
-              Bản đồ Google Maps theo địa điểm quán. Vui lòng gọi trước khi đến
-              xa.
+              {t.contact.mapNote}
             </p>
           </FadeIn>
         </div>

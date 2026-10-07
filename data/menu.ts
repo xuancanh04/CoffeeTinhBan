@@ -26,8 +26,8 @@ export const menuItems: MenuItem[] = [
     name: "Cà phê đen",
     price: "15.000đ",
     description: "Pha trực tiếp, đậm vị, hậu ngọt nhẹ — uống nóng hoặc đá.",
-    imageSrc:"/assets/ca-phe-den-da.webp",
-    imageAlt: "Ly cà phê phin đen",
+    imageSrc: "/assets/Gemini_Generated_Image_fgqq5nfgqq5nfgqq.png",
+    imageAlt: "Ly cà phê phin đen nguyên chất",
     category: "do-uong",
   },
   {
@@ -35,8 +35,8 @@ export const menuItems: MenuItem[] = [
     name: "Cà phê sữa",
     price: "18.000đ",
     description: "Sữa đặc vừa phải, cân bằng đắng – ngọt.",
-    imageSrc:"/assets/caphesua.webp",
-    imageAlt: "Cà phê sữa đá",
+    imageSrc: "/assets/hinh-anh-ly-ca-phe-dep-nhat-16.jpg",
+    imageAlt: "Ly cà phê phin sữa đá",
     category: "do-uong",
   },
   {

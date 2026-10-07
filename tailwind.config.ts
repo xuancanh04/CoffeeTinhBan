@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,51 +34,60 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#2C211C",
+          DEFAULT: "rgb(var(--rgb-primary) / <alpha-value>)",
+          light: "rgb(var(--rgb-primary) / <alpha-value>)",
         },
         secondary: {
-          DEFAULT: "#6B5E54",
+          DEFAULT: "rgb(var(--rgb-secondary) / <alpha-value>)",
         },
         muted: {
-          DEFAULT: "#8F857A",
+          DEFAULT: "rgb(var(--rgb-muted) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#8F6340",
-          hover: "#7A5234",
+          DEFAULT: "#C88647", // Rich warm amber caramel gold
+          hover: "#B37237",
+          light: "#E8A86B",
         },
         leaf: {
-          DEFAULT: "#6F7D5C",
+          DEFAULT: "#6B7B59",
         },
         surface: {
-          DEFAULT: "#F2F0EB",
-          card: "#FFFCF8",
-          dark: "#231914",
+          DEFAULT: "rgb(var(--rgb-surface) / <alpha-value>)",
+          card: "rgb(var(--rgb-surface-card) / <alpha-value>)",
+          dark: "rgb(var(--rgb-surface-dark) / <alpha-value>)",
         },
         cream: {
-          DEFAULT: "#EBE6DC",
-          deep: "#DDD5C8",
+          DEFAULT: "rgb(var(--rgb-cream) / <alpha-value>)",
+          deep: "rgb(var(--rgb-cream-deep) / <alpha-value>)",
         },
       },
       boxShadow: {
-        soft: "0 18px 40px -18px rgba(44, 33, 28, 0.28)",
-        card: "0 10px 28px -14px rgba(44, 33, 28, 0.16)",
-        lift: "0 22px 50px -20px rgba(44, 33, 28, 0.22)",
+        soft: "0 18px 42px -16px rgba(31, 21, 16, 0.24)",
+        card: "0 10px 30px -12px rgba(31, 21, 16, 0.12), 0 0 0 1px rgba(200, 134, 71, 0.08)",
+        lift: "0 24px 56px -18px rgba(31, 21, 16, 0.22), 0 0 20px 2px rgba(200, 134, 71, 0.15)",
+        gold: "0 8px 28px -6px rgba(200, 134, 71, 0.45)",
       },
       backgroundImage: {
         atmosphere:
-          "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(143, 99, 64, 0.12), transparent 55%), radial-gradient(ellipse 60% 40% at 100% 20%, rgba(111, 125, 92, 0.08), transparent 50%)",
+          "radial-gradient(ellipse 85% 55% at 50% -12%, rgba(200, 134, 71, 0.18), transparent 60%), radial-gradient(ellipse 65% 45% at 100% 25%, rgba(232, 168, 107, 0.12), transparent 55%), radial-gradient(ellipse 60% 40% at 0% 75%, rgba(31, 21, 16, 0.06), transparent 50%)",
         hero_overlay: "url('/assets/hero/hero-overlay.png')",
         opening_hours: "url('/assets/opening-hours/bg.png')",
         footer: "url('/assets/footer/bg.png')",
+        gold_gradient: "linear-gradient(135deg, #E8A86B 0%, #C88647 50%, #A36429 100%)",
       },
       keyframes: {
         "fade-up": {
           from: { opacity: "0", transform: "translateY(12px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        pulse_gold: {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.8" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.5s ease forwards",
+        "pulse-gold": "pulse_gold 3s ease-in-out infinite",
       },
     },
   },

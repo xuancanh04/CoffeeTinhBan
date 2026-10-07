@@ -8,11 +8,8 @@ const ease = [0.22, 1, 0.36, 1] as const;
 type FadeInProps = {
   children: ReactNode;
   className?: string;
-  /** Trễ (giây) — dùng cho stagger */
   delay?: number;
-  /** `mount`: khi vào trang (hero). `view`: khi cuộn tới */
   trigger?: "mount" | "view";
-  /** Dùng thẻ `li` cho danh sách */
   as?: "div" | "li";
 };
 
@@ -33,33 +30,34 @@ export function FadeIn({
   const motionProps =
     trigger === "mount"
       ? {
-          initial: { opacity: 0, y: 10 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4, ease, delay },
+          initial: { opacity: 0, y: 18, rotateX: 8, scale: 0.98 },
+          animate: { opacity: 1, y: 0, rotateX: 0, scale: 1 },
+          transition: { duration: 0.55, ease, delay },
         }
       : {
-          initial: { opacity: 0, y: 12 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, margin: "-40px", amount: 0.2 },
-          transition: { duration: 0.38, ease, delay },
+          initial: { opacity: 0, y: 28, rotateX: 10, scale: 0.97 },
+          whileInView: { opacity: 1, y: 0, rotateX: 0, scale: 1 },
+          viewport: { once: true, amount: 0.05 },
+          transition: { duration: 0.55, ease, delay },
         };
+
+  const style = { transformPerspective: 900 };
 
   if (as === "li") {
     return (
-      <motion.li className={className} {...motionProps}>
+      <motion.li className={className} style={style} {...motionProps}>
         {children}
       </motion.li>
     );
   }
 
   return (
-    <motion.div className={className} {...motionProps}>
+    <motion.div className={className} style={style} {...motionProps}>
       {children}
     </motion.div>
   );
 }
 
-/** Hero: stagger nhẹ các khối con */
 export function HeroStagger({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion();
   if (reduce) return <>{children}</>;
@@ -71,7 +69,7 @@ export function HeroStagger({ children }: { children: ReactNode }) {
       variants={{
         hidden: {},
         visible: {
-          transition: { staggerChildren: 0.05, delayChildren: 0.04 },
+          transition: { staggerChildren: 0.08, delayChildren: 0.08 },
         },
       }}
     >
@@ -94,11 +92,12 @@ export function HeroStaggerItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 12 },
+        hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.38, ease },
+          filter: "blur(0px)",
+          transition: { duration: 0.55, ease },
         },
       }}
     >
