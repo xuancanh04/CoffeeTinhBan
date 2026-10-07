@@ -77,7 +77,7 @@ export function SiteHeader() {
           <LangToggle />
           <ThemeToggle />
           <Button asChild variant="outline" size="sm">
-            <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
+            <a href={`tel:${site.phone}`} onClick={() => { window.location.href = `tel:${site.phone}`; }}>{site.phoneDisplay}</a>
           </Button>
         </div>
 
@@ -157,6 +157,7 @@ export function SiteHeader() {
               >
                 <a
                   href={`tel:${site.phone}`}
+                  onClick={() => { window.location.href = `tel:${site.phone}`; }}
                   className="mt-2 block rounded-2xl bg-gold-gradient px-4 py-3.5 text-center text-base font-bold text-white shadow-gold"
                 >
                   {t.home.call} {site.phoneDisplay}

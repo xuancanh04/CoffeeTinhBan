@@ -39,6 +39,7 @@ export default function LienHePage() {
                 <dd className="mt-2">
                   <a
                     href={`tel:${site.phone}`}
+                    onClick={() => { window.location.href = `tel:${site.phone}`; }}
                     className="text-xl font-bold text-accent hover:underline hover:text-accent-light"
                   >
                     {site.phoneDisplay}

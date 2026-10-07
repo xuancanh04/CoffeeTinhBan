@@ -349,6 +349,7 @@ export function HomeClient() {
             </Button>
             <a
               href={`tel:${site.phone}`}
+              onClick={() => { window.location.href = `tel:${site.phone}`; }}
               className="flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
             >
               <PhoneCall className="h-4 w-4" />

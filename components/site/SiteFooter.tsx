@@ -67,6 +67,7 @@ export function SiteFooter() {
               <span className="text-xs font-semibold uppercase tracking-wider text-accent/80">{t.footer.phone}:</span>{" "}
               <a
                 href={`tel:${site.phone}`}
+                onClick={() => { window.location.href = `tel:${site.phone}`; }}
                 className="font-medium text-accent hover:underline hover:text-accent-light"
               >
                 {site.phoneDisplay}
