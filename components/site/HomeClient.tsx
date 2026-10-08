@@ -95,7 +95,7 @@ export function HomeClient() {
         {/* Glow orb light background */}
         <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-accent/20 blur-[130px] pointer-events-none" />
 
-        <div className="container relative z-10 flex min-h-[85vh] md:min-h-[min(92vh,920px)] flex-col justify-end pb-16 pt-28 md:pb-24 md:pt-40">
+        <div className="container relative z-10 flex min-h-[75vh] md:min-h-[min(92vh,920px)] flex-col justify-end pb-12 pt-24 md:pb-24 md:pt-40">
           <HeroStagger>
             {/* Pill Badge */}
             <HeroStaggerItem>
@@ -110,7 +110,7 @@ export function HomeClient() {
             {/* Brand Title */}
             <HeroStaggerItem className="mt-5">
               <motion.h1
-                className="max-w-4xl font-primary text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5rem]"
+                className="max-w-4xl font-primary text-[2.5rem] font-bold leading-[1.08] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5rem]"
                 style={{
                   textShadow: reduce
                     ? undefined
@@ -135,7 +135,7 @@ export function HomeClient() {
 
             {/* Subtitle with gold accent accentuation */}
             <HeroStaggerItem className="mt-4">
-              <p className="max-w-2xl text-xl font-medium leading-snug text-white/95 md:text-2xl">
+              <p className="max-w-2xl text-lg font-medium leading-snug text-white/95 sm:text-xl md:text-2xl">
                 {t.home.heroSubtitle}
               </p>
             </HeroStaggerItem>
@@ -211,7 +211,7 @@ export function HomeClient() {
       </section>
 
       {/* ── 3. STORY HIGHLIGHT BANNER (Kết nối linh hồn quán) ── */}
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden py-12 md:py-24">
         <AmbientOrbs />
         <div className="container relative z-10">
           <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
@@ -222,7 +222,7 @@ export function HomeClient() {
                   <Coffee className="h-4 w-4" />
                   <span>{t.home.storyEyebrow}</span>
                 </div>
-                <h2 className="mt-3 font-primary text-3xl font-bold tracking-tight text-primary md:text-4xl lg:text-[2.6rem] leading-tight">
+                <h2 className="mt-3 font-primary text-2xl font-bold tracking-tight text-primary sm:text-3xl md:text-4xl lg:text-[2.6rem] leading-tight">
                   {t.home.storyTitle}
                 </h2>
                 <div className="mt-6 space-y-4 font-secondary text-base leading-relaxed text-secondary md:text-[1.05rem] md:leading-[1.8]">
@@ -230,9 +230,9 @@ export function HomeClient() {
                   <p>{t.home.storyDesc2}</p>
                 </div>
 
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <Button asChild variant="outline" className="group">
-                    <Link href="/gioi-thieu" className="flex items-center gap-2">
+                <div className="mt-8 flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4">
+                  <Button asChild variant="outline" className="group w-full sm:w-auto">
+                    <Link href="/gioi-thieu" className="flex items-center justify-center gap-2">
                       <span>{t.home.storyReadMore}</span>
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </Link>
@@ -283,7 +283,7 @@ export function HomeClient() {
 
 
       {/* ── 5. SERVICES CARDS SECTION (Cải tiến với Icon badges & Glass) ── */}
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden py-12 md:py-24">
         <AmbientOrbs />
         <div className="container relative z-10">
           <FadeIn>
@@ -360,7 +360,7 @@ export function HomeClient() {
       </section>
 
       {/* ── 6. FEATURED PRODUCTS (Thực đơn nổi bật với 3 sản phẩm) ── */}
-      <section className="relative overflow-hidden border-y border-cream-deep/40 bg-surface-card/45 py-16 md:py-24">
+      <section className="relative overflow-hidden border-y border-cream-deep/40 bg-surface-card/45 py-12 md:py-24">
         <AmbientOrbs />
         <div className="container relative z-10">
           <FadeIn>

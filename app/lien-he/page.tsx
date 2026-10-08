@@ -9,7 +9,7 @@ export default function LienHePage() {
   const { t } = useI18n();
 
   return (
-    <div className="pb-20 pt-10 md:pt-14">
+    <div className="pb-16 pt-8 md:pb-20 md:pt-14">
       <div className="container">
         <FadeIn>
           <SectionTitle

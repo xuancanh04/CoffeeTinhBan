@@ -422,60 +422,7 @@ export function CoffeeCup3D() {
             })}
           </div>
 
-          {/* Active Drink Info Card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedDrink}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.25 }}
-              className="rounded-2xl border border-primary/10 bg-primary/5 p-5"
-            >
-              <div className="flex items-center justify-between">
-                <h4 className="font-primary text-xl font-bold text-primary">
-                  {activeInfo.name}
-                </h4>
-                <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-bold text-accent">
-                  {activeInfo.price}
-                </span>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-secondary">
-                {activeInfo.desc}
-              </p>
 
-              {/* Ratios progress bars */}
-              <div className="mt-4 space-y-2 text-xs">
-                <div>
-                  <div className="mb-1 flex justify-between text-secondary">
-                    <span>Tỷ lệ Cà phê Phin</span>
-                    <span className="font-bold">{Math.round(activeInfo.coffeeRatio * 100)}%</span>
-                  </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-cream-deep">
-                    <div
-                      className="h-full bg-accent transition-all duration-500"
-                      style={{ width: `${activeInfo.coffeeRatio * 100}%` }}
-                    />
-                  </div>
-                </div>
-
-                {activeInfo.milkRatio > 0 && (
-                  <div>
-                    <div className="mb-1 flex justify-between text-secondary">
-                      <span>Tỷ lệ Sữa đặc</span>
-                      <span className="font-bold">{Math.round(activeInfo.milkRatio * 100)}%</span>
-                    </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-cream-deep">
-                      <div
-                        className="h-full bg-[#E9C46A] transition-all duration-500"
-                        style={{ width: `${activeInfo.milkRatio * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
 
           {/* Toggles */}
           <div className="flex flex-wrap gap-4">

@@ -27,7 +27,7 @@ export function StickyContact() {
             // Đảm bảo click được kích hoạt trên mobile
             window.location.href = `tel:${site.phone}`;
           }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-[#DC2626] to-[#EF4444] text-white shadow-[0_8px_25px_-4px_rgba(239,68,68,0.55)] ring-4 ring-surface/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 md:h-[52px] md:w-[52px]"
+          className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#DC2626] to-[#EF4444] text-white shadow-[0_8px_25px_-4px_rgba(239,68,68,0.55)] ring-4 ring-surface/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500 md:h-14 md:w-14"
           aria-label={`${t.sticky.call} ${site.phoneDisplay}`}
         >
           {/* CSS Ping Animation instead of Framer Motion for better performance */}
@@ -36,7 +36,7 @@ export function StickyContact() {
             style={{ animationDuration: '1.8s' }}
             aria-hidden
           />
-          <Phone className="relative h-6 w-6 animate-pulse" aria-hidden />
+          <Phone className="relative h-5 w-5 md:h-6 md:w-6 animate-pulse" aria-hidden />
         </a>
       </motion.div>
 
@@ -55,7 +55,7 @@ export function StickyContact() {
             // Đảm bảo click được kích hoạt trên mobile
             window.open(site.zaloUrl, "_blank");
           }}
-          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-[#0052CC] to-[#0080FF] text-white shadow-[0_8px_25px_-4px_rgba(0,104,255,0.55)] ring-4 ring-surface/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0068FF] md:h-[52px] md:w-[52px]"
+          className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr from-[#0052CC] to-[#0080FF] text-white shadow-[0_8px_25px_-4px_rgba(0,104,255,0.55)] ring-4 ring-surface/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0068FF] md:h-14 md:w-14"
           aria-label={t.sticky.zalo}
         >
           <span
