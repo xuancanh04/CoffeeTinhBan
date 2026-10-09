@@ -17,7 +17,8 @@ import { Button } from "@/components/ui/button";
 import { ParallaxHero } from "@/components/effects/ParallaxHero";
 import { AmbientOrbs } from "@/components/effects/AmbientOrbs";
 import { Tilt3D } from "@/components/effects/Tilt3D";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import * as React from "react";
 import { 
   Coffee, 
   Flame, 
@@ -58,6 +59,7 @@ export function HomeClient() {
   const preview = menuItems.slice(0, 3);
   const reduce = useReducedMotion();
   const { t } = useI18n();
+  const [isReady, setIsReady] = React.useState(true); // Render immediately
 
   const services = [
     { 
@@ -90,7 +92,18 @@ export function HomeClient() {
     <>
       {/* ── 1. HERO SECTION PREMIUM ── */}
       <ParallaxHero imageSrc={heroImage} imageAlt="Không gian và ly cà phê ấm áp">
-        <CoffeeBeansScene className="absolute inset-0 z-[5] opacity-60 md:opacity-90" />
+        <AnimatePresence>
+          {isReady && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5 }}
+              className="absolute inset-0 z-[5] opacity-60 md:opacity-90"
+            >
+              <CoffeeBeansScene className="h-full w-full" />
+            </motion.div>
+          )}
+        </AnimatePresence>
         
         {/* Glow orb light background */}
         <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-accent/20 blur-[130px] pointer-events-none" />
@@ -410,8 +423,8 @@ export function HomeClient() {
           </FadeIn>
 
           <FadeIn delay={0.15}>
-            <div className="overflow-hidden rounded-3xl border border-accent/20 bg-surface-card/85 p-4 shadow-card backdrop-blur-md md:p-8">
-              <CoffeeCup3D />
+            <div className="overflow-hidden rounded-3xl border border-accent/20 bg-surface-card/85 p-4 shadow-card backdrop-blur-md md:p-8 min-h-[400px]">
+              {isReady ? <CoffeeCup3D /> : null}
             </div>
           </FadeIn>
         </div>

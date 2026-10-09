@@ -32,8 +32,8 @@ export function StickyContact() {
         >
           {/* CSS Ping Animation instead of Framer Motion for better performance */}
           <span
-            className="absolute inset-0 rounded-full bg-red-500/50 animate-ping"
-            style={{ animationDuration: '1.8s' }}
+            className="absolute inset-0 rounded-full bg-red-500/20 animate-ping"
+            style={{ animationDuration: '3s' }}
             aria-hidden
           />
           <Phone className="relative h-5 w-5 md:h-6 md:w-6 animate-pulse" aria-hidden />
@@ -59,8 +59,8 @@ export function StickyContact() {
           aria-label={t.sticky.zalo}
         >
           <span
-            className="absolute inset-0 rounded-full bg-[#0080FF]/50 animate-ping"
-            style={{ animationDuration: '2.5s' }}
+            className="absolute inset-0 rounded-full bg-[#0080FF]/20 animate-ping"
+            style={{ animationDuration: '3s' }}
             aria-hidden
           />
           {/* Official Vector Zalo Icon */}

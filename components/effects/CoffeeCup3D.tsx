@@ -77,7 +77,7 @@ const drinkDetails: Record<
 // Procedural 3D Ice Cube
 function IceCube({ position, rotation }: { position: [number, number, number]; rotation: [number, number, number] }) {
   return (
-    <RoundedBox args={[0.32, 0.32, 0.32]} radius={0.06} smoothness={4} position={position} rotation={rotation} castShadow>
+    <RoundedBox args={[0.32, 0.32, 0.32]} radius={0.06} smoothness={2} position={position} rotation={rotation} castShadow>
       <meshPhysicalMaterial
         color="#F0F8FF"
         transmission={0.95}
@@ -175,11 +175,11 @@ function CupModel({
       <mesh position={[0, 0.6, 0]} castShadow receiveShadow>
         <cylinderGeometry args={[0.82, 0.68, 1.3, 32, 1, false]} />
         <MeshTransmissionMaterial
-          backside
-          samples={4}
+          backside={false}
+          samples={2}
           thickness={0.2}
-          chromaticAberration={0.02}
-          anisotropy={0.1}
+          chromaticAberration={0}
+          anisotropy={0}
           distortion={0.1}
           distortionScale={0.2}
           temporalDistortion={0.0}
@@ -338,12 +338,13 @@ export function CoffeeCup3D() {
         <div className="relative h-[380px] w-full rounded-2xl bg-gradient-to-b from-primary/5 via-primary/10 to-primary/20 shadow-inner lg:col-span-7">
           <Canvas
             camera={{ position: [0, 1.2, 4.2], fov: 45 }}
-            gl={{ antialias: true, alpha: true }}
+            gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+            dpr={[1, 1.5]}
           >
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[4, 6, 5]} intensity={1.2} castShadow color="#FFF2E2" />
-            <pointLight position={[-4, 2, -2]} intensity={0.5} color="#D4A373" />
-            <spotLight position={[0, 6, 2]} intensity={0.8} color="#FFD166" angle={0.5} />
+            <ambientLight intensity={0.4} />
+            <directionalLight position={[4, 6, 5]} intensity={0.8} castShadow color="#FFF2E2" />
+            <pointLight position={[-4, 2, -2]} intensity={0.4} color="#D4A373" />
+            <spotLight position={[0, 6, 2]} intensity={0.6} color="#FFD166" angle={0.5} />
             <Environment preset="city" />
 
             <Suspense fallback={null}>
@@ -354,8 +355,8 @@ export function CoffeeCup3D() {
                   showSteam={showSteam}
                 />
               </Float>
-              <Sparkles count={25} scale={4} size={1.5} color="#D4A373" opacity={0.4} />
-              <ContactShadows position={[0, -1.05, 0]} opacity={0.4} scale={6} blur={2.2} />
+              <Sparkles count={15} scale={4} size={1.5} color="#D4A373" opacity={0.4} />
+              <ContactShadows position={[0, -1.05, 0]} opacity={0.4} scale={6} blur={2.2} resolution={256} />
             </Suspense>
 
             <OrbitControls

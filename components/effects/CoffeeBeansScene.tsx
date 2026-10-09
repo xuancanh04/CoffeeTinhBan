@@ -27,105 +27,98 @@ type BeanConfig = {
   lightness: number;
 };
 
-// Generates an authentic realistic procedural 3D coffee bean geometry
-function useCoffeeBeanGeometry() {
-  return useMemo(() => {
-    const geom = new THREE.SphereGeometry(0.5, 96, 96);
-    const pos = geom.attributes.position;
+// Generate authentic realistic procedural 3D coffee bean geometry at module load
+// This prevents blocking the main thread during React hydration/rendering
+const beanGeometry = (function createBeanGeometry() {
+  const geom = new THREE.SphereGeometry(0.5, 32, 32);
+  const pos = geom.attributes.position;
 
-    for (let i = 0; i < pos.count; i++) {
-      let x = pos.getX(i);
-      let y = pos.getY(i);
-      let z = pos.getZ(i);
+  for (let i = 0; i < pos.count; i++) {
+    let x = pos.getX(i);
+    let y = pos.getY(i);
+    let z = pos.getZ(i);
 
-      // 1. Oval elongation along Y axis (coffee bean oblong proportion ~ 1.55)
-      y *= 1.52;
+    // 1. Oval elongation along Y axis (coffee bean oblong proportion ~ 1.55)
+    y *= 1.52;
 
-      // 2. Natural taper towards bean tips with subtle asymmetric curvature
-      const normalizedY = y / 1.52; // -0.5 to 0.5
-      const profileRadius = Math.cos(normalizedY * Math.PI * 0.44);
-      const taper = 0.76 + 0.24 * profileRadius;
-      x *= taper;
+    // 2. Natural taper towards bean tips with subtle asymmetric curvature
+    const normalizedY = y / 1.52; // -0.5 to 0.5
+    const profileRadius = Math.cos(normalizedY * Math.PI * 0.44);
+    const taper = 0.76 + 0.24 * profileRadius;
+    x *= taper;
 
-      // Flatten Z axis: front face is relatively flat with deep crease, back is domed convex
-      z *= taper * 0.68;
+    // Flatten Z axis: front face is relatively flat with deep crease, back is domed convex
+    z *= taper * 0.68;
 
-      // 3. Deep sculpted S-crease & split on front face (z > 0)
-      if (z > 0.01) {
-        // Subtle organic S-curve longitudinal offset
-        const sCurve = Math.sin(y * 2.1) * 0.07 + Math.cos(y * 4.2) * 0.015;
-        const distFromCrease = Math.abs(x - sCurve);
+    // 3. Deep sculpted S-crease & split on front face (z > 0)
+    if (z > 0.01) {
+      // Subtle organic S-curve longitudinal offset
+      const sCurve = Math.sin(y * 2.1) * 0.07 + Math.cos(y * 4.2) * 0.015;
+      const distFromCrease = Math.abs(x - sCurve);
 
-        // Crease valley width
-        const creaseRadius = 0.17;
-        if (distFromCrease < creaseRadius) {
-          // Deep inward fold carving towards the bean center
-          const t = distFromCrease / creaseRadius;
-          const indent = (1 - Math.pow(t, 1.8)) * 0.28;
-          z -= indent;
+      // Crease valley width
+      const creaseRadius = 0.17;
+      if (distFromCrease < creaseRadius) {
+        // Deep inward fold carving towards the bean center
+        const t = distFromCrease / creaseRadius;
+        const indent = (1 - Math.pow(t, 1.8)) * 0.28;
+        z -= indent;
 
-          // Pull vertices slightly inward towards the cleft seam
-          x += (sCurve - x) * 0.42 * (1 - t);
-        } else {
-          // Slight rounded roll on both sides of the crease (the bean lobes)
-          const lobeT = Math.min(1, (distFromCrease - creaseRadius) / 0.25);
-          z += Math.sin(lobeT * Math.PI) * 0.04;
-        }
+        // Pull vertices slightly inward towards the cleft seam
+        x += (sCurve - x) * 0.42 * (1 - t);
       } else {
-        // Convex bean back with rounded smooth dome
-        z *= 1.22;
-        // Subtle longitudinal shallow spine depression on back
-        const spineDist = Math.abs(x);
-        if (spineDist < 0.15) {
-          z += (0.15 - spineDist) * 0.05;
-        }
+        // Slight rounded roll on both sides of the crease (the bean lobes)
+        const lobeT = Math.min(1, (distFromCrease - creaseRadius) / 0.25);
+        z += Math.sin(lobeT * Math.PI) * 0.04;
       }
-
-      // 4. Subtle roasted micro-surface variation
-      const microNoise =
-        (Math.sin(x * 24 + y * 12) +
-          Math.cos(y * 22 + z * 16) +
-          Math.sin(z * 20 + x * 10)) *
-        0.007;
-      x += microNoise;
-      y += microNoise * 0.8;
-      z += microNoise;
-
-      pos.setXYZ(i, x, y, z);
+    } else {
+      // Convex bean back with rounded smooth dome
+      z *= 1.22;
+      // Subtle longitudinal shallow spine depression on back
+      const spineDist = Math.abs(x);
+      if (spineDist < 0.15) {
+        z += (0.15 - spineDist) * 0.05;
+      }
     }
 
-    geom.computeVertexNormals();
-    return geom;
-  }, []);
-}
+    // 4. Subtle roasted micro-surface variation
+    const microNoise =
+      (Math.sin(x * 24 + y * 12) +
+        Math.cos(y * 22 + z * 16) +
+        Math.sin(z * 20 + x * 10)) *
+      0.007;
+    x += microNoise;
+    y += microNoise * 0.8;
+    z += microNoise;
+
+    pos.setXYZ(i, x, y, z);
+  }
+
+  geom.computeVertexNormals();
+  return geom;
+})();
 
 // Inner chaff seam geometry (the golden-tan silver skin line inside the roasted bean)
-function useChaffLineGeometry() {
-  return useMemo(() => {
-    const points: THREE.Vector3[] = [];
-    const steps = 32;
-    for (let i = 0; i <= steps; i++) {
-      const t = (i / steps - 0.5) * 1.28;
-      const x = Math.sin(t * 2.3) * 0.08;
-      const y = t * 1.1;
-      const z = 0.055 - Math.pow(Math.abs(t), 2) * 0.04;
-      points.push(new THREE.Vector3(x, y, z));
-    }
-    const curve = new THREE.CatmullRomCurve3(points);
-    return new THREE.TubeGeometry(curve, 36, 0.017, 8, false);
-  }, []);
-}
+const chaffGeometry = (function createChaffGeometry() {
+  const points: THREE.Vector3[] = [];
+  const steps = 32;
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps - 0.5) * 1.28;
+    const x = Math.sin(t * 2.3) * 0.08;
+    const y = t * 1.1;
+    const z = 0.055 - Math.pow(Math.abs(t), 2) * 0.04;
+    points.push(new THREE.Vector3(x, y, z));
+  }
+  const curve = new THREE.CatmullRomCurve3(points);
+  return new THREE.TubeGeometry(curve, 16, 0.017, 4, false);
+})();
 
 function IndividualBean({
   config,
-  beanGeom,
-  chaffGeom,
   scrollOffset,
   pointer,
 }: {
   config: BeanConfig;
-  beanGeom: THREE.BufferGeometry;
-  chaffGeom: THREE.BufferGeometry;
   scrollOffset: { current: number };
   pointer: { x: number; y: number };
 }) {
@@ -200,7 +193,7 @@ function IndividualBean({
       scale={config.scale}
     >
       {/* Ultra realistic Physical material with clearcoat oily sheen & micro reflectivity */}
-      <mesh geometry={beanGeom} castShadow receiveShadow>
+      <mesh geometry={beanGeometry} castShadow receiveShadow>
         <meshPhysicalMaterial
           color={beanColor}
           roughness={0.35}
@@ -211,7 +204,7 @@ function IndividualBean({
         />
       </mesh>
       {/* Natural golden chaff line seam */}
-      <mesh geometry={chaffGeom}>
+      <mesh geometry={chaffGeometry}>
         <meshStandardMaterial
           color={chaffColor}
           roughness={0.55}
@@ -449,8 +442,6 @@ const beanConfigs: BeanConfig[] = [
 ];
 
 function SceneContent() {
-  const beanGeom = useCoffeeBeanGeometry();
-  const chaffGeom = useChaffLineGeometry();
   const scrollOffset = useRef(0);
   const pointerPos = useRef({ x: 0, y: 0 });
   const { viewport } = useThree();
@@ -471,28 +462,28 @@ function SceneContent() {
 
   return (
     <>
-      <ambientLight intensity={0.95} />
+      <ambientLight intensity={0.6} />
       {/* Warm Golden Key Sunlight */}
       <directionalLight
         position={[5.5, 7.5, 5]}
-        intensity={3.2}
+        intensity={1.5}
         castShadow
         color="#FFF0D4"
       />
       {/* Warm Rich Amber Fill Light */}
-      <pointLight position={[-4, 2, 2]} intensity={1.8} color="#E89E5B" />
+      <pointLight position={[-4, 2, 2]} intensity={0.8} color="#E89E5B" />
       {/* Striking Golden Rim Light from behind/edge for dramatic 3D contour */}
       <directionalLight
         position={[-4.5, 6, -4]}
-        intensity={3.0}
+        intensity={1.2}
         color="#FFCA60"
       />
       {/* Under-glow warmth bouncing from cup/table */}
-      <pointLight position={[0, -3.2, 1.5]} intensity={1.2} color="#D48B47" />
+      <pointLight position={[0, -3.2, 1.5]} intensity={0.6} color="#D48B47" />
       {/* Subtle Center Spotlight for depth */}
       <spotLight
         position={[0, 6, 3.5]}
-        intensity={2.0}
+        intensity={1.0}
         color="#FFF5E4"
         angle={0.65}
         penumbra={0.9}
@@ -505,8 +496,6 @@ function SceneContent() {
           <IndividualBean
             key={idx}
             config={cfg}
-            beanGeom={beanGeom}
-            chaffGeom={chaffGeom}
             scrollOffset={scrollOffset}
             pointer={pointerPos.current}
           />
@@ -514,12 +503,12 @@ function SceneContent() {
 
         <SteamParticleSystem />
         <Sparkles
-          count={65}
+          count={20}
           scale={[7, 6, 5]}
-          size={2.8}
-          speed={0.65}
+          size={1.5}
+          speed={0.3}
           color="#FFD166"
-          opacity={0.6}
+          opacity={0.3}
         />
       </group>
 
@@ -528,6 +517,7 @@ function SceneContent() {
         opacity={0.48}
         scale={14}
         blur={2.8}
+        resolution={256}
         far={5}
       />
     </>
