@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["Affogato", "gsap", "Macchiato", "microfoam", "swiper", "Zenbrew"]
+  "cSpell.words": ["Affogato", "gsap", "Macchiato", "microfoam", "swiper", "Zenbrew"],
+  "css.lint.unknownAtRules": "ignore",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

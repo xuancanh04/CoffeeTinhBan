@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { ContactShadows, Sparkles, Environment } from "@react-three/drei";
+import { ContactShadows, Sparkles, Environment, OrbitControls } from "@react-three/drei";
 import { Suspense, useMemo, useRef, useEffect } from "react";
 import { useReducedMotion } from "framer-motion";
 import type { Group } from "three";
@@ -30,7 +30,7 @@ type BeanConfig = {
 // Generate authentic realistic procedural 3D coffee bean geometry at module load
 // This prevents blocking the main thread during React hydration/rendering
 const beanGeometry = (function createBeanGeometry() {
-  const geom = new THREE.SphereGeometry(0.5, 32, 32);
+  const geom = new THREE.SphereGeometry(0.5, 22, 22);
   const pos = geom.attributes.position;
 
   for (let i = 0; i < pos.count; i++) {
@@ -125,7 +125,8 @@ function IndividualBean({
   const meshGroup = useRef<Group>(null);
 
   const beanColor = useMemo(
-    () => new THREE.Color().setHSL(config.hue, 0.62, config.lightness),
+    // Multiply lightness by 0.5 for a deeper, darker roast color
+    () => new THREE.Color().setHSL(config.hue, 0.62, config.lightness * 0.5),
     [config.hue, config.lightness],
   );
   const chaffColor = useMemo(() => new THREE.Color("#E2C49C"), []);
@@ -512,6 +513,14 @@ function SceneContent() {
         />
       </group>
 
+      <OrbitControls 
+        enableZoom={false} 
+        enablePan={false} 
+        autoRotate={true} 
+        autoRotateSpeed={0.8} 
+        makeDefault
+      />
+
       <ContactShadows
         position={[0, -1.9, 0]}
         opacity={0.48}
@@ -534,11 +543,11 @@ export function CoffeeBeansScene({ className }: CoffeeBeansSceneProps) {
   if (reduce) return null;
 
   return (
-    <div className={className} aria-hidden style={{ pointerEvents: "none" }}>
+    <div className={className} aria-hidden style={{ touchAction: "pan-y" }}>
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         camera={{ position: [0, 0.25, 5.2], fov: 42 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: true, alpha: true, powerPreference: "default", preserveDrawingBuffer: false }}
         style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>

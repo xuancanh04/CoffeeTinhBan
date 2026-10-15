@@ -82,6 +82,7 @@
   .text-gold-gradient {
     background: linear-gradient(135deg, #E8A86B 0%, #C88647 50%, #A36429 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
@@ -93,4 +94,18 @@
     border-color: rgba(200, 134, 71, 0.25);
     box-shadow: 0 0 16px rgba(200, 134, 71, 0.12);
   }
+
+  @keyframes float-ambient {
+    0%, 100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(12px, -24px, 0) scale(1.08);
+    }
+  }
+
+  .ambient-orb {
+    animation: float-ambient 10s ease-in-out infinite;
+  }
 }
+

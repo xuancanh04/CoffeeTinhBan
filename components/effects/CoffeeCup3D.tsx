@@ -335,11 +335,14 @@ export function CoffeeCup3D() {
 
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
         {/* 3D Canvas Area */}
-        <div className="relative h-[380px] w-full rounded-2xl bg-gradient-to-b from-primary/5 via-primary/10 to-primary/20 shadow-inner lg:col-span-7">
+        <div 
+          className="relative h-[380px] w-full rounded-2xl bg-gradient-to-b from-primary/5 via-primary/10 to-primary/20 shadow-inner lg:col-span-7"
+          style={{ touchAction: "none" }} // Ensure swipe works on mobile without scrolling the page
+        >
           <Canvas
             camera={{ position: [0, 1.2, 4.2], fov: 45 }}
-            gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-            dpr={[1, 1.5]}
+            gl={{ antialias: true, alpha: true, powerPreference: "default" }}
+            dpr={[1, 1.25]}
           >
             <ambientLight intensity={0.4} />
             <directionalLight position={[4, 6, 5]} intensity={0.8} castShadow color="#FFF2E2" />
@@ -361,11 +364,14 @@ export function CoffeeCup3D() {
 
             <OrbitControls
               enableZoom={true}
-              minDistance={2.5}
-              maxDistance={6}
-              minPolarAngle={Math.PI / 6}
-              maxPolarAngle={Math.PI / 2 + 0.1}
-              autoRotate={false}
+              enablePan={false}
+              minDistance={2.0}
+              maxDistance={7}
+              minPolarAngle={0} // Allows looking from directly above
+              maxPolarAngle={Math.PI / 2 + 0.15} // Allows looking slightly below eye level
+              autoRotate={true}
+              autoRotateSpeed={1.5}
+              makeDefault
             />
           </Canvas>
 

@@ -77,7 +77,7 @@ export function SiteHeader() {
           <LangToggle />
           <ThemeToggle />
           <Button asChild variant="outline" size="sm">
-            <a href={`tel:${site.phone}`} onClick={() => { window.location.href = `tel:${site.phone}`; }}>{site.phoneDisplay}</a>
+            <a href={`tel:${site.phone}`}>{site.phoneDisplay}</a>
           </Button>
         </div>
 

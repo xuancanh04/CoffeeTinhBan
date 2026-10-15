@@ -30,29 +30,27 @@ export function FadeIn({
   const motionProps =
     trigger === "mount"
       ? {
-          initial: { opacity: 0, y: 18, rotateX: 8, scale: 0.98 },
-          animate: { opacity: 1, y: 0, rotateX: 0, scale: 1 },
-          transition: { duration: 0.55, ease, delay },
+          initial: { opacity: 0, y: 16 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5, ease, delay },
         }
       : {
-          initial: { opacity: 0, y: 28, rotateX: 10, scale: 0.97 },
-          whileInView: { opacity: 1, y: 0, rotateX: 0, scale: 1 },
-          viewport: { once: true, amount: 0.05 },
-          transition: { duration: 0.55, ease, delay },
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "100px 0px" },
+          transition: { duration: 0.5, ease, delay },
         };
-
-  const style = { transformPerspective: 900 };
 
   if (as === "li") {
     return (
-      <motion.li className={className} style={style} {...motionProps}>
+      <motion.li className={className} {...motionProps}>
         {children}
       </motion.li>
     );
   }
 
   return (
-    <motion.div className={className} style={style} {...motionProps}>
+    <motion.div className={className} {...motionProps}>
       {children}
     </motion.div>
   );
@@ -69,7 +67,7 @@ export function HeroStagger({ children }: { children: ReactNode }) {
       variants={{
         hidden: {},
         visible: {
-          transition: { staggerChildren: 0.08, delayChildren: 0.08 },
+          transition: { staggerChildren: 0.08, delayChildren: 0.05 },
         },
       }}
     >
@@ -92,12 +90,11 @@ export function HeroStaggerItem({
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
+        hidden: { opacity: 0, y: 16 },
         visible: {
           opacity: 1,
           y: 0,
-          filter: "blur(0px)",
-          transition: { duration: 0.55, ease },
+          transition: { duration: 0.5, ease },
         },
       }}
     >
