@@ -1,0 +1,28 @@
+name: 💡 Đề xuất tính năng (Feature Request)
+description: Đề xuất một tính năng, hiệu ứng hoặc cải tiến mới cho website
+title: "[FEAT]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bạn có ý tưởng hay giúp giao diện hoặc trải nghiệm thưởng thức cà phê trên web thêm phần thú vị? Hãy chia sẻ với chúng tôi!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Vấn đề cần giải quyết hoặc nhu cầu thực tế
+      description: Tính năng này giải quyết vấn đề gì hoặc mang lại lợi ích gì?
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Giải pháp / Mô tả tính năng đề xuất
+      description: Hãy miêu tả chi tiết cách bạn muốn tính năng này hoạt động hoặc hiển thị.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Tài liệu tham khảo hoặc hình ảnh đính kèm (nếu có)
+      description: Dẫn chứng liên kết hoặc hình ảnh mock-up nếu có.

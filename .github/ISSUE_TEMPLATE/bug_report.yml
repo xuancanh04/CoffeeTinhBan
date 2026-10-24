@@ -1,0 +1,40 @@
+name: 🐛 Báo cáo lỗi (Bug Report)
+description: Báo cáo một lỗi bất thường hoặc hành vi sai trong ứng dụng
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Cảm ơn bạn đã báo cáo lỗi để giúp dự án Coffee Tình Bạn ngày càng hoàn thiện hơn!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Mô tả lỗi
+      description: Hãy giải thích rõ lỗi đang xảy ra là gì.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Các bước tái hiện lỗi
+      description: Liệt kê các bước cụ thể để tái hiện lại lỗi.
+      placeholder: |
+        1. Truy cập vào trang '...'
+        2. Nhấp chuột vào nút '...'
+        3. Kéo xuống phần '...'
+        4. Thấy lỗi xuất hiện
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Kết quả mong đợi
+      description: Bạn mong đợi điều gì sẽ diễn ra khi thực hiện các bước trên?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Môi trường (Trình duyệt, Hệ điều hành, Thiết bị)
+      placeholder: "Ví dụ: Chrome 122 trên Windows 11 / Safari trên iPhone 15"
